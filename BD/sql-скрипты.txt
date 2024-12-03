@@ -64,7 +64,6 @@ CREATE TABLE rent_conditions (
     id SERIAL PRIMARY KEY,                        
     buses_id INTEGER NOT NULL REFERENCES buses(id), 
     min_hours	INTEGER not null,
-    max_distance	INTEGER not null,
     min_cancel_time integer not null,
     price_per_hour	integer not null
 );
@@ -85,3 +84,21 @@ CREATE TABLE notifications (
      notification_type notification_type not null,
      notification_is boolean NOT NULL
 ); 
+
+
+// Добавленны ограничения:
+
+ALTER TABLE public.bookings
+ADD CONSTRAINT check_start_end_time CHECK (start_time <= end_time);
+
+ALTER TABLE public.bookings
+ADD CONSTRAINT check_passengers_count CHECK (passengers_count > 0);
+
+ALTER TABLE public.bookings
+ADD CONSTRAINT check_price CHECK (price > 0);
+
+ALTER TABLE public.buses
+ADD CONSTRAINT check_seat_count CHECK (seat_count > 0);
+
+ALTER TABLE public.rent_conditions
+ADD CONSTRAINT check_price_per_hour CHECK (price_per_hour > 0);

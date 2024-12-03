@@ -99,7 +99,10 @@ CREATE TABLE public.bookings (
     order_status public.booking_status NOT NULL,
     payment_method public.payment_method NOT NULL,
     payment_status public.payment_status NOT NULL,
-    order_date timestamp without time zone NOT NULL
+    order_date timestamp without time zone NOT NULL,
+    CONSTRAINT check_passengers_count CHECK ((passengers_count > 0)),
+    CONSTRAINT check_price CHECK ((price > 0)),
+    CONSTRAINT check_start_end_time CHECK ((start_time <= end_time))
 );
 
 
@@ -149,7 +152,8 @@ CREATE TABLE public.buses (
     has_usb_charger boolean DEFAULT false,
     has_usb_sync boolean DEFAULT false,
     has_accessibility_features boolean DEFAULT false,
-    CONSTRAINT buses_seat_count_check CHECK ((seat_count > 0))
+    CONSTRAINT buses_seat_count_check CHECK ((seat_count > 0)),
+    CONSTRAINT check_seat_count CHECK ((seat_count > 0))
 );
 
 
@@ -221,9 +225,9 @@ CREATE TABLE public.rent_conditions (
     id integer NOT NULL,
     buses_id integer NOT NULL,
     min_hours integer NOT NULL,
-    max_distance integer NOT NULL,
     min_cancel_time integer NOT NULL,
-    price_per_hour integer NOT NULL
+    price_per_hour integer NOT NULL,
+    CONSTRAINT check_price_per_hour CHECK ((price_per_hour > 0))
 );
 
 
@@ -455,7 +459,7 @@ COPY public.notifications (id, user_id, notification_type, notification_is) FROM
 -- Data for Name: rent_conditions; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY public.rent_conditions (id, buses_id, min_hours, max_distance, min_cancel_time, price_per_hour) FROM stdin;
+COPY public.rent_conditions (id, buses_id, min_hours, min_cancel_time, price_per_hour) FROM stdin;
 \.
 
 
