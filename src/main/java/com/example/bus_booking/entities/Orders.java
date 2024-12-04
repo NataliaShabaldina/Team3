@@ -23,7 +23,95 @@ public class Orders {
     private OrderStatus orderStatus;
     private PaymentStatus paymentStatus;
 
-    private LocalDateTime begin = LocalDateTime.of(2025,01,01,12,00);
-    private LocalDateTime end = LocalDateTime.of(2025,01,02,12,00);
+    private LocalDateTime begin = LocalDateTime.of(2025, 01, 01, 12, 00);
+    private LocalDateTime end = LocalDateTime.of(2025, 01, 02, 12, 00);
     private LocalDateTime timeOrderCreation = LocalDateTime.now();
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public String getNumberOfPeople() {
+        return numberOfPeople;
+    }
+
+    public void setNumberOfPeople(String numberOfPeople) {
+        this.numberOfPeople = numberOfPeople;
+    }
+
+    public String getStartingPoint() {
+        return startingPoint;
+    }
+
+    public void setStartingPoint(String startingPoint) {
+        this.startingPoint = startingPoint;
+    }
+
+    public String getEndPoint() {
+        return endPoint;
+    }
+
+    public void setEndPoint(String endPoint) {
+        this.endPoint = endPoint;
+    }
+
+    public int getRentalCost() {
+        return rentalCost;
+    }
+
+    public void setRentalCost(int rentalCost) {
+        this.rentalCost = rentalCost;
+    }
+
+    public String getCommentOfClient() {
+        return commentOfClient;
+    }
+
+    public void setCommentOfClient(String commentOfClient) {
+        this.commentOfClient = commentOfClient;
+    }
+
+    public OrderStatus getOrderStatus() {
+        return orderStatus;
+    }
+
+    public void setOrderStatus(OrderStatus orderStatus) {
+        this.orderStatus = orderStatus;
+    }
+
+    public PaymentStatus getPaymentStatus() {
+        return paymentStatus;
+    }
+
+    public void setPaymentStatus(PaymentStatus paymentStatus) {
+        this.paymentStatus = paymentStatus;
+    }
+
+    public LocalDateTime getBegin() {
+        return begin;
+    }
+
+    public void setBegin(LocalDateTime begin) {
+        this.begin = begin;
+    }
+
+    public LocalDateTime getEnd() {
+        return end;
+    }
+
+    public void setEnd(LocalDateTime end) {
+        this.end = end;
+    }
+
+    public LocalDateTime getTimeOrderCreation() {
+        return timeOrderCreation;
+    }
+
+    public void setTimeOrderCreation(LocalDateTime timeOrderCreation) {
+        this.timeOrderCreation = timeOrderCreation;
+    }
 }
