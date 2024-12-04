@@ -22,6 +22,7 @@ public class Orders {
     private String commentOfClient;
     private OrderStatus orderStatus;
     private PaymentStatus paymentStatus;
+    private PaymentMethod paymentMethod;
 
     private LocalDateTime begin = LocalDateTime.of(2025, 01, 01, 12, 00);
     private LocalDateTime end = LocalDateTime.of(2025, 01, 02, 12, 00);
@@ -113,5 +114,13 @@ public class Orders {
 
     public void setTimeOrderCreation(LocalDateTime timeOrderCreation) {
         this.timeOrderCreation = timeOrderCreation;
+    }
+
+    public PaymentMethod getPaymentMethod() {
+        return paymentMethod;
+    }
+
+    public void setPaymentMethod(PaymentMethod paymentMethod) {
+        this.paymentMethod = paymentMethod;
     }
 }
