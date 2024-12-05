@@ -28,6 +28,9 @@ public class Orders {
     private LocalDateTime end = LocalDateTime.of(2025, 01, 02, 12, 00);
     private LocalDateTime timeOrderCreation = LocalDateTime.now();
 
+    public Orders() {
+    }
+
     public long getId() {
         return id;
     }
