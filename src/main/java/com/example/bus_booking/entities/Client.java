@@ -29,7 +29,7 @@ public class Client {
 
     private LocalDateTime registrationTime = LocalDateTime.now();
     private LocalDateTime lastLoginTime;
-    private Boolean emailVerified = false;
+    private Boolean isVerified = false;
 
     byte[] profilePhotos;
 
