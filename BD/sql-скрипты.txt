@@ -82,11 +82,12 @@ CREATE TABLE notifications (
     id SERIAL PRIMARY KEY,       
     user_id INTEGER NOT NULL REFERENCES users(id), 
      notification_type notification_type not null,
+     notification_method notification_method not null,
      notification_is boolean NOT NULL
 ); 
 
 
-// Добавленны ограничения:
+// Добавлены ограничения:
 
 ALTER TABLE public.bookings
 ADD CONSTRAINT check_start_end_time CHECK (start_time <= end_time);

@@ -1,18 +1,22 @@
 package com.example.bus_booking.entities;
 
+import com.example.bus_booking.enums.NotificationMethod;
 import com.example.bus_booking.enums.NotificationType;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import jakarta.persistence.*;
+import lombok.*;
 
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@Entity
 public class Notifications {
-    int id;
-    int userId;
-    NotificationType notificationType;
-    boolean notificationIs;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
+    @ManyToOne
+    private Client client;
+    private NotificationType notificationType;
+    private NotificationMethod notificationMethod;
+    private boolean notificationIs;
 }

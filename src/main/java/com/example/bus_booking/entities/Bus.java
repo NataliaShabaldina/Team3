@@ -1,5 +1,6 @@
 package com.example.bus_booking.entities;
 
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -7,26 +8,31 @@ import lombok.Setter;
 
 import java.time.LocalDate;
 
+@Entity
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 public class Bus {
-    int id;
-    int companyId;
-    String model;
-    int yearOfManufacture;
-    LocalDate lastTODate;
-    byte[] busPhotos;
-    byte[] driverPhoto;
-    byte[] driverLicense;
-    int seatCount;
-    boolean hasTv;
-    boolean hasWifi;
-    boolean hasAirConditioning;
-    boolean hasInteriorLighting;
-    boolean hasMicrophone;
-    boolean hasUsbCharger;
-    boolean hasUsbSync;
-    boolean hasAccessibilityFeatures;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
+    @ManyToOne
+    private TransportCompanies transportCompanies;
+    private String model;
+    private int yearOfManufacture;
+    private LocalDate lastTODate;
+    private byte[] busPhotos;
+    private byte[] driverPhoto;
+    private byte[] driverLicense;
+    private int seatCount;
+
+    private boolean hasTv;
+    private boolean hasWifi;
+    private boolean hasAirConditioning;
+    private boolean hasInteriorLighting;
+    private boolean hasMicrophone;
+    private boolean hasUsbCharger;
+    private boolean hasUsbSync;
+    private boolean hasAccessibilityFeatures;
 }

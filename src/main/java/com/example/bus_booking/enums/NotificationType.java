@@ -7,9 +7,9 @@ public enum NotificationType {
     BOOKING_REMIND("напоминание о бронировании"),
     PAYMENT_REMIND("напоминание об оплате");
 
-    private final String remind;
+    private final String description;
 
-    NotificationType(String remind) {
-        this.remind = remind;
+    NotificationType(String description) {
+        this.description = description;
     }
 }
