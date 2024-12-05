@@ -1,4 +1,5 @@
 package com.example.bus_booking.repositories;
 
-public class ReviewRepository {
+public interface ReviewRepository {
+
 }
