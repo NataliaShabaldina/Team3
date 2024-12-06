@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity
 @Getter
@@ -26,6 +27,8 @@ public class Bus {
     private byte[] driverPhoto;
     private byte[] driverLicense;
     private int seatCount;
+    private LocalDate availableStart;
+    private LocalDate availableEnd;
 
     private boolean hasTv;
     private boolean hasWifi;
