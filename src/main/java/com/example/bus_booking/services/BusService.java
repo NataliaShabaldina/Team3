@@ -58,4 +58,11 @@ public class BusService {
         }
     }
 
+    public double getAverageRating() {
+        return busRepository.findAverageRating();
+    }
+
+    public double getAverageRatingByBusId(Long busId) {
+        return busRepository.findAvgRatingByBusId(busId);
+    }
 }

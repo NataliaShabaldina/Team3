@@ -16,4 +16,10 @@ public interface BusRepository extends JpaRepository<Bus, Long> {
 
     @Query("Select bus from Bus bus where bus.availableStart <= :start_time and bus.availableEnd >= :end_time")
     List<Bus> findAvailableBuses(@Param("start_time") LocalDate startDate, @Param("end_time") LocalDate endDate);
+
+    @Query("select AVG(bus.averageRating) from Bus bus")
+    double findAverageRating();
+
+    @Query("select avg(bus.averageRating) from Bus bus where bus.id = :id")
+    double findAvgRatingByBusId(@Param("id") Long id);
 }

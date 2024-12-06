@@ -30,6 +30,8 @@ public class Bus {
     private LocalDate availableStart;
     private LocalDate availableEnd;
 
+    private double averageRating;
+
     private boolean hasTv;
     private boolean hasWifi;
     private boolean hasAirConditioning;
