@@ -1,6 +1,7 @@
 package com.example.bus_booking.entities;
 
 import com.example.bus_booking.enums.OrderStatus;
+import com.example.bus_booking.enums.PaymentMethod;
 import com.example.bus_booking.enums.PaymentStatus;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
