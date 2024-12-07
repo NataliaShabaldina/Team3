@@ -7,12 +7,12 @@ import org.springframework.data.repository.query.Param;
 import java.util.List;
 
 public interface OrderRepository extends JpaRepository<Orders, Long> {
-    @Query("SELECT f.order FROM Orders f WHERE f.order.id = :orderId")
+    @Query("SELECT id FROM Orders WHERE client_id = :clientId")
     List<Orders> findOrder(@Param("clientId") Long clientId);
 
-    @Query("select f.order FROM Order f WHERE f.order_status = :order_status")
-    String findStatus();
+    @Query("select order_status FROM Order WHERE id = :orderId")
+    String findStatus(@Param("orderId") Long orderId);
 
-    @Query("Select bus from Bus bus where f.bus")
-    List<Orders> findOrderBus();
+    @Query("Select id from orders where bus_id")
+    List<Orders> findOrderBus(@Param("busId") Long busId);
 }

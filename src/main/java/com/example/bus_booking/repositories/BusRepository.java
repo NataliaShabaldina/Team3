@@ -15,12 +15,9 @@ import java.util.List;
 public interface BusRepository extends JpaRepository<Bus, Long> {
     List<Bus> findByModel(String model);
 
-    @Query("Select bus from Bus bus where bus.availableStart <= :start_time and bus.availableEnd >= :end_time")
+    @Query("Select bus_id from orders where buses.available_start <= :start_time and buses.available_end >= :end_time")
     List<Bus> findAvailableBuses(@Param("start_time") LocalDate startDate, @Param("end_time") LocalDate endDate);
 
-    @Query("select AVG(bus.averageRating) from Bus bus")
-    double findAverageRating();
-
-    @Query("select avg(bus.averageRating) from Bus bus where bus.id = :id")
+    @Query("select avg_rating from buses where buses.id = :id")
     double findAvgRatingByBusId(@Param("id") Long id);
 }
