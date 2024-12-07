@@ -1,13 +1,10 @@
 package com.example.bus_booking.entities;
 
-import jakarta.persistence.Entity;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity
 @Getter
@@ -15,5 +12,14 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Favorites {
-    private List<Bus> favoriteBuses = new ArrayList<>();
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @ManyToOne
+    private Client client;
+
+    @ManyToOne
+    private Bus bus;
+
 }

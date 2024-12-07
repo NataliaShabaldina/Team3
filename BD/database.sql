@@ -189,12 +189,48 @@ CREATE TABLE public.clients (
     registration_date timestamp without time zone NOT NULL,
     last_login_date timestamp without time zone,
     profile_photo bytea,
+    is_verified boolean NOT NULL,
     CONSTRAINT users_email_check CHECK (((email)::text ~* '^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$'::text)),
     CONSTRAINT users_phone_number_check CHECK (((phone_number)::text ~ '^(\+\d{1,3})?[\d\s\-\(\)]{5,15}$'::text))
 );
 
 
 ALTER TABLE public.clients OWNER TO postgres;
+
+--
+-- Name: favorites; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.favorites (
+    id integer NOT NULL,
+    user_id integer NOT NULL,
+    bus_id integer NOT NULL
+);
+
+
+ALTER TABLE public.favorites OWNER TO postgres;
+
+--
+-- Name: favorites_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.favorites_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE public.favorites_id_seq OWNER TO postgres;
+
+--
+-- Name: favorites_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.favorites_id_seq OWNED BY public.favorites.id;
+
 
 --
 -- Name: notifications; Type: TABLE; Schema: public; Owner: postgres
@@ -442,6 +478,13 @@ ALTER TABLE ONLY public.clients ALTER COLUMN id SET DEFAULT nextval('public.user
 
 
 --
+-- Name: favorites id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.favorites ALTER COLUMN id SET DEFAULT nextval('public.favorites_id_seq'::regclass);
+
+
+--
 -- Name: notifications id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -488,7 +531,15 @@ COPY public.buses (id, company_id, model, year_of_manufacture, last_to_date, bus
 -- Data for Name: clients; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY public.clients (id, first_name, last_name, middle_name, birth_date, gender, email, phone_number, registration_date, last_login_date, profile_photo) FROM stdin;
+COPY public.clients (id, first_name, last_name, middle_name, birth_date, gender, email, phone_number, registration_date, last_login_date, profile_photo, is_verified) FROM stdin;
+\.
+
+
+--
+-- Data for Name: favorites; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.favorites (id, user_id, bus_id) FROM stdin;
 \.
 
 
@@ -540,6 +591,13 @@ SELECT pg_catalog.setval('public.buses_id_seq', 1, false);
 
 
 --
+-- Name: favorites_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.favorites_id_seq', 1, false);
+
+
+--
 -- Name: notifications_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
@@ -587,6 +645,14 @@ SELECT pg_catalog.setval('public.users_id_seq', 1, false);
 
 ALTER TABLE ONLY public.buses
     ADD CONSTRAINT buses_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: favorites favorites_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.favorites
+    ADD CONSTRAINT favorites_pkey PRIMARY KEY (id);
 
 
 --
@@ -646,6 +712,22 @@ ALTER TABLE ONLY public.transport_companies
 
 
 --
+-- Name: notifications unique_client_notification_type; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.notifications
+    ADD CONSTRAINT unique_client_notification_type UNIQUE (client_id, notification_type);
+
+
+--
+-- Name: favorites unique_user_bus; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.favorites
+    ADD CONSTRAINT unique_user_bus UNIQUE (user_id, bus_id);
+
+
+--
 -- Name: clients users_email_key; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -682,6 +764,22 @@ CREATE TRIGGER trigger_update_avg_rating AFTER INSERT OR DELETE OR UPDATE ON pub
 
 ALTER TABLE ONLY public.buses
     ADD CONSTRAINT buses_company_id_fkey FOREIGN KEY (company_id) REFERENCES public.transport_companies(id);
+
+
+--
+-- Name: favorites favorites_bus_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.favorites
+    ADD CONSTRAINT favorites_bus_id_fkey FOREIGN KEY (bus_id) REFERENCES public.buses(id);
+
+
+--
+-- Name: favorites favorites_user_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.favorites
+    ADD CONSTRAINT favorites_user_id_fkey FOREIGN KEY (user_id) REFERENCES public.clients(id);
 
 
 --
