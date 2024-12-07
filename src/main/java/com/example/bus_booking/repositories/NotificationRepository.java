@@ -1,6 +1,6 @@
 package com.example.bus_booking.repositories;
 
-import com.example.bus_booking.entities.Notifications;
+import com.example.bus_booking.entities.Notification;
 import com.example.bus_booking.enums.NotificationMethod;
 import com.example.bus_booking.enums.NotificationType;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -11,13 +11,13 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface NotificationRepository extends JpaRepository<Notifications, Long> {
+public interface NotificationRepository extends JpaRepository<Notification, Long> {
 
-    @Query("SELECT n FROM Notifications n WHERE n.notificationIs = true")
-    List<Notifications> findActiveNotifications();
+    @Query("SELECT Notification FROM Notification WHERE notificationIs = true")
+    List<Notification> findActiveNotifications();
 
-    @Query("SELECT n FROM Notifications n WHERE n.client.id = :clientId AND n.notificationType = :type")
-    List<Notifications> findByClientIdAndNotificationType(@Param("clientId") Long clientId, @Param("type") NotificationType type);
+    @Query("SELECT n FROM Notification n WHERE n.client.id = :clientId AND n.notificationType = :notificationType")
+    List<Notification> findByClientIdAndNotificationType(@Param("clientId") Long clientId, @Param("notificationType") NotificationType notificationType);
 
-    List<Notifications> findByNotificationMethod(NotificationMethod method);
+    List<Notification> findByNotificationMethod(NotificationMethod method);
 }

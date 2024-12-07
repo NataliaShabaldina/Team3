@@ -1,5 +1,9 @@
 package com.example.bus_booking.enums;
 
+import lombok.Getter;
+
+
+@Getter
 public enum PaymentMethod {
 
     CASH("Наличными"),
@@ -11,8 +15,5 @@ public enum PaymentMethod {
         this.description = description;
     }
 
-    public String getDescription() {
-        return description;
-    }
 }
 

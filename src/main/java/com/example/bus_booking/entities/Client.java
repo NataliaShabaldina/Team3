@@ -1,14 +1,14 @@
 package com.example.bus_booking.entities;
 
+import com.example.bus_booking.enums.Gender;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity
 @Getter
@@ -22,15 +22,17 @@ public class Client {
     private String firstName;
     private String lastName;
     private String middleName;
-    private String gender;
+    private LocalDate birthDate;
+    @Enumerated(EnumType.STRING)
+    private Gender gender;
     private String email;
     private String phoneNumber;
-
-    private LocalDateTime registrationTime = LocalDateTime.now();
-    private LocalDateTime lastLoginTime;
+    private LocalDateTime registrationDate = LocalDateTime.now();
+    private LocalDateTime lastLoginDate;
+    byte[] profilePhotos;
     private Boolean isVerified = false;
 
-    byte[] profilePhotos;
+
 
 
 

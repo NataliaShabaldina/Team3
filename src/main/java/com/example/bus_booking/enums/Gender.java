@@ -1,13 +1,15 @@
 package com.example.bus_booking.enums;
 
+import lombok.Getter;
+
+@Getter
 public enum Gender {
     MALE("Мужской"),
+    OTHER("Другое"),
     FEMALE("Женский");
-    private String description;
+
+    private final String description;
     Gender(String description) {
         this.description = description;
-    }
-    public String getDescription() {
-        return description;
     }
 }

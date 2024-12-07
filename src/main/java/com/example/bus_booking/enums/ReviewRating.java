@@ -1,5 +1,8 @@
 package com.example.bus_booking.enums;
 
+import lombok.Getter;
+
+@Getter
 public enum ReviewRating {
     ONE(1),
     TWO(2),
@@ -13,7 +16,4 @@ public enum ReviewRating {
         this.rating = rating;
     }
 
-    public int getRating() {
-        return rating;
-    }
 }
