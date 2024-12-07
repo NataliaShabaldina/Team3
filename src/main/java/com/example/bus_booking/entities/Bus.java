@@ -17,7 +17,7 @@ import java.time.LocalDateTime;
 public class Bus {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
     @ManyToOne
     private TransportCompanies transportCompanies;
     private String model;

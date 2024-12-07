@@ -13,7 +13,7 @@ import lombok.*;
 public class Notifications {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
     @ManyToOne
     private Client client;
     private NotificationType notificationType;
