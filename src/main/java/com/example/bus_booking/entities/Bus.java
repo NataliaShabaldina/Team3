@@ -31,6 +31,14 @@ public class Bus {
 
     private double avgRating;
 
+    private int minRentHours;
+    private int minCancelDay;
+    private int priceWeekends;
+    private int priceWeekdays;
+
+    private String registrationNumber;
+    private boolean isActive;
+
     private boolean hasTv;
     private boolean hasWifi;
     private boolean hasAirConditioning;

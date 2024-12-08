@@ -94,17 +94,49 @@ CREATE TABLE notifications (
 
 // Добавлены ограничения:
 
-ALTER TABLE public.bookings
+ALTER TABLE public.orders
 ADD CONSTRAINT check_start_end_time CHECK (start_time <= end_time);
 
-ALTER TABLE public.bookings
-ADD CONSTRAINT check_passengers_count CHECK (passengers_count > 0);
+ALTER TABLE public.orders
+ADD CONSTRAINT check_number_of_people CHECK (number_of_people > 0);
 
-ALTER TABLE public.bookings
+ALTER TABLE public.orders
 ADD CONSTRAINT check_price CHECK (price > 0);
 
-ALTER TABLE public.buses
+ALTER TABLE public.bus
 ADD CONSTRAINT check_seat_count CHECK (seat_count > 0);
 
-ALTER TABLE public.rent_conditions
-ADD CONSTRAINT check_price_per_hour CHECK (price_per_hour > 0);
+ALTER TABLE public.bus
+ADD CONSTRAINT check_price_weekdays CHECK (price_weekdays > 0);
+
+ALTER TABLE public.bus
+ADD CONSTRAINT check_price_weekends CHECK (price_weekends > 0);
+
+CREATE OR REPLACE FUNCTION update_avg_rating()
+RETURNS TRIGGER AS $$
+BEGIN
+    UPDATE buses
+    SET avg_rating = (
+        SELECT COALESCE(AVG(rating), 0)
+        FROM reviews
+        WHERE buses_id = NEW.buses_id
+    )
+    WHERE id = NEW.buses_id;
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER trigger_update_avg_rating_insert
+AFTER INSERT ON review
+FOR EACH ROW
+EXECUTE FUNCTION update_avg_rating();
+
+CREATE TRIGGER trigger_update_avg_rating_update
+AFTER UPDATE OF rating ON review
+FOR EACH ROW
+EXECUTE FUNCTION update_avg_rating();
+
+CREATE TRIGGER trigger_update_avg_rating_delete
+AFTER DELETE ON review
+FOR EACH ROW
+EXECUTE FUNCTION update_avg_rating();

@@ -21,6 +21,7 @@ public class Orders {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @ManyToOne
+    @JoinColumn(name = "client_id", nullable = false)
     private Client client;
     @ManyToOne
     private Bus bus;
@@ -33,7 +34,7 @@ public class Orders {
     private String startPoint;
     private String endPoint;
 
-    private String numberOfPeople;
+    private int numberOfPeople;
     private String commentOfClient;
     private int price;
 
