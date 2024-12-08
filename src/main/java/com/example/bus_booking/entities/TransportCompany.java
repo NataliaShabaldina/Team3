@@ -16,7 +16,7 @@ import java.time.LocalDateTime;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class TransportCompanies {
+public class TransportCompany {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

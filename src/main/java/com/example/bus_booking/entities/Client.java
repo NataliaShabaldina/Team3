@@ -6,6 +6,8 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -23,17 +25,20 @@ public class Client {
     private String lastName;
     private String middleName;
     private LocalDate birthDate;
+
     @Enumerated(EnumType.STRING)
     private Gender gender;
     private String email;
     private String phoneNumber;
-    private LocalDateTime registrationDate = LocalDateTime.now();
+    @CreationTimestamp
+    private LocalDateTime registrationDate;
+
+    @UpdateTimestamp
     private LocalDateTime lastLoginDate;
+
+
+    @Lob
     byte[] profilePhotos;
-    private Boolean isVerified = false;
-
-
-
-
+    private boolean isVerified = false;
 
 }

@@ -24,14 +24,12 @@ public class Review {
     private Client client;
 
     @Column(nullable = false)
-    private int rating;
+    private double rating;
 
     @Lob
     private String text;
     private LocalDateTime createdTime = LocalDateTime.now();
+
+    @Lob
     private String answer;
-
-
-
-
 }

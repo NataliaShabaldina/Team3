@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -18,7 +19,7 @@ public class BusService {
         return busRepository.findByModel(model);
     }
 
-    public List<Bus> findAvailableBuses(LocalDate startDate, LocalDate endDate) {
+    public List<Bus> findAvailableBuses(LocalDateTime startDate, LocalDateTime endDate) {
         return busRepository.findAvailableBuses(startDate, endDate);
     }
 
@@ -52,6 +53,8 @@ public class BusService {
             bus.setHasUsbCharger(busDetails.isHasUsbCharger());
             bus.setHasUsbSync(busDetails.isHasUsbSync());
             bus.setHasAccessibilityFeatures(busDetails.isHasAccessibilityFeatures());
+            bus.setAvailableStart(busDetails.getAvailableStart());
+            bus.setAvailableEnd(busDetails.getAvailableEnd());
             return busRepository.save(bus);
         } else {
             return null; //выбросить исключение?

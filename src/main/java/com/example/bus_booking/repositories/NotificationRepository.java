@@ -13,7 +13,7 @@ import java.util.List;
 @Repository
 public interface NotificationRepository extends JpaRepository<Notification, Long> {
 
-    @Query("SELECT Notification FROM Notification WHERE notificationIs = true")
+    @Query("SELECT n FROM Notification n WHERE n.notificationIs = true")
     List<Notification> findActiveNotifications();
 
     @Query("SELECT n FROM Notification n WHERE n.client.id = :clientId AND n.notificationType = :notificationType")

@@ -1,12 +1,16 @@
 package com.example.bus_booking.entities;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.validator.constraints.Length;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity
 @Getter
@@ -18,18 +22,35 @@ public class Bus {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @ManyToOne
-    private TransportCompanies transportCompanies;
-    private String model;
-    private int yearOfManufacture;
-    private LocalDate lastTODate;
-    private byte[] busPhotos;
-    private byte[] driverPhoto;
-    private byte[] driverLicense;
-    private int seatCount;
-    private LocalDate availableStart;
-    private LocalDate availableEnd;
+    @JoinColumn(name = "company_id", nullable = false)
+    private TransportCompany transportCompany;
 
-    private double avgRating;
+    @NotNull
+    @Length(max = 15)
+    private String model;
+
+    private int yearOfManufacture;
+
+    @NotNull
+    private LocalDateTime lastTODate;
+
+    @Lob
+    private byte[] busPhotos;
+    @Lob
+    private byte[] driverPhoto;
+    @Lob
+    private byte[] driverLicense;
+    @Positive
+    private int seatCount;
+
+    private LocalDateTime availableStart;
+
+    private LocalDateTime availableEnd;
+
+
+    @Column(name = "avg_rating", columnDefinition = "NUMERIC(2, 1)")
+    private Double avgRating;
+
 
     private int minRentHours;
     private int minCancelDay;

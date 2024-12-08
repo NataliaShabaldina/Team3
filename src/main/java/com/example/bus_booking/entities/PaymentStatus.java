@@ -1,5 +1,6 @@
 package com.example.bus_booking.entities;
 
+import com.example.bus_booking.enums.PaymentStatusEnum;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -11,11 +12,13 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-public class PaymentMethod {
+public class PaymentStatus {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @ManyToOne
     private Client client;
-    private Boolean isPaid;
+
+    @Enumerated(EnumType.STRING)
+    private PaymentStatusEnum paymentStatus;
 }
