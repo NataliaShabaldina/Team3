@@ -21,8 +21,11 @@ public class ConfirmationCode {
     @ManyToOne
     private Client client;
     private String code;
+
     private LocalDateTime createdTime = LocalDateTime.now();
+
     private LocalDateTime expiredTime;
+
     private Boolean isUsed = false;
 
 }

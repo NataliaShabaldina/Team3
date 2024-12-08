@@ -12,7 +12,7 @@ import java.util.List;
 @Repository
 public interface FavoriteRepository extends JpaRepository<Favorites, Long> {
 
-    @Query("SELECT Bus FROM Favorites WHERE client.getid() = :clientId")
+    @Query("SELECT f.bus FROM Favorites f WHERE f.client.id = :clientId")
     List<Bus> findFavoriteBusesByClientId(@Param("clientId") Long clientId);
 
 }

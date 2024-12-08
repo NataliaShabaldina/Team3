@@ -2,7 +2,7 @@ package com.example.bus_booking.entities;
 
 import com.example.bus_booking.enums.OrderStatus;
 import com.example.bus_booking.enums.PaymentMethod;
-import com.example.bus_booking.enums.PaymentStatus;
+import com.example.bus_booking.enums.PaymentStatusEnum;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -33,7 +33,7 @@ public class Orders {
     private String startPoint;
     private String endPoint;
 
-    private String numberOfPeople;
+    private int numberOfPeople;
     private String commentOfClient;
     private int price;
 
@@ -41,7 +41,8 @@ public class Orders {
     private OrderStatus orderStatus;
 
     @Enumerated(EnumType.STRING)
-    private PaymentStatus paymentStatus;
+    private PaymentStatusEnum paymentStatus;
+
     @Enumerated(EnumType.STRING)
     private PaymentMethod paymentMethod;
 

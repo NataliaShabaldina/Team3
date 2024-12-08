@@ -14,4 +14,5 @@ public interface ClientRepository extends JpaRepository<Client, Long> {
 
     //проверить, подтвержден ли клиент
     boolean existsByIdAndIsVerifiedTrue(Long clientId);
+
 }

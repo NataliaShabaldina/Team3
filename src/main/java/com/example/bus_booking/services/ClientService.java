@@ -5,6 +5,7 @@ import com.example.bus_booking.repositories.ClientRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 
@@ -18,28 +19,18 @@ public class ClientService {
     }
 
     public Client getClientById(Long clientId) {
-        Optional<Client> optionalClient = clientRepository.findById(clientId);
-        if (optionalClient.isPresent()) {
-            return optionalClient.get();
-        } else  {
-            throw new RuntimeException("Клиент не найден");
-        }
+        return clientRepository.findById(clientId)
+                .orElseThrow(() -> new NoSuchElementException("Клиент с id " + clientId + " не найден"));
     }
 
     public Client getClientByEmail(String email) {
-        Client client = clientRepository.findByEmail(email);
-        if (client == null) {
-            throw new RuntimeException("Клиент с email" + email + " не найден");
-        }
-        return client;
+        return Optional.ofNullable(clientRepository.findByEmail(email))
+                .orElseThrow(() -> new NoSuchElementException("Клиент с email" + email + " не найден"));
     }
 
     public Client getClientByPhoneNumber(String phoneNuber) {
-        Client client = clientRepository.findByPhoneNumber(phoneNuber);
-        if (client == null) {
-            throw new RuntimeException("Клиент с номером телефона " + phoneNuber + " не найден");
-        }
-        return client;
+        return Optional.ofNullable(clientRepository.findByPhoneNumber(phoneNuber))
+                .orElseThrow(() -> new NoSuchElementException("Клиент с номером телефона " + phoneNuber + " не найден"));
     }
 
     public Client updateClient(Long clientId, Client updatedClient) {

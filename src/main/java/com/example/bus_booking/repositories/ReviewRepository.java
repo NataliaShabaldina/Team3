@@ -9,9 +9,9 @@ import java.util.List;
 
 public interface ReviewRepository extends JpaRepository<Review, Long> {
 
-    @Query("SELECT n FROM Review n WHERE client = :clientId")
-    List<Review> findByClientIdAndReview(@Param("clientId") Long clientId);
+    @Query("SELECT r FROM Review r WHERE r.client.id= :clientId")
+    List<Review> findByClientId(@Param("clientId") Long clientId);
 
-    @Query("SELECT n FROM Review n WHERE bus = :busId")
-    List<Review> findByBusIdAndReview(@Param("busId") Long busId);
+    @Query("SELECT r FROM Review r WHERE r.bus.id = :busId")
+    List<Review> findByBusId(@Param("busId") Long busId);
 }
