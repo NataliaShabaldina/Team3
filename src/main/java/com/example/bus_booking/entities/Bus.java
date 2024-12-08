@@ -48,7 +48,7 @@ public class Bus {
     private LocalDateTime availableEnd;
 
 
-    @Column(name = "avg_rating", columnDefinition = "NUMERIC(3, 2)")
+    @Column(name = "avg_rating", columnDefinition = "NUMERIC(2, 1)")
     private Double avgRating;
 
 
