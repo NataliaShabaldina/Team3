@@ -7,7 +7,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 @Entity
 @Getter
@@ -30,7 +29,7 @@ public class Bus {
     private LocalDate availableStart;
     private LocalDate availableEnd;
 
-    private double averageRating;
+    private double avgRating;
 
     private boolean hasTv;
     private boolean hasWifi;

@@ -1,5 +1,8 @@
 package com.example.bus_booking.enums;
 
+import lombok.Getter;
+
+@Getter
 public enum OrderStatus {
     CONFIRMED("Подтвержден"),
     COMPLETED("Завершен"),
@@ -11,7 +14,4 @@ public enum OrderStatus {
         this.description = description;
     }
 
-    public String getDescription() {
-        return description;
-    }
 }

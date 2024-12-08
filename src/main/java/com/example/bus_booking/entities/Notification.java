@@ -10,13 +10,16 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-public class Notifications {
+public class Notification {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @ManyToOne
     private Client client;
+
+    @Enumerated(EnumType.STRING)
     private NotificationType notificationType;
+    @Enumerated(EnumType.STRING)
     private NotificationMethod notificationMethod;
     private boolean notificationIs;
 }

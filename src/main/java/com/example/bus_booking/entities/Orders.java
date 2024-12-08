@@ -9,7 +9,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity
@@ -26,18 +25,24 @@ public class Orders {
     @ManyToOne
     private Bus bus;
 
-    private String numberOfPeople;
-    private String startingPoint;
-    private String endPoint;
-    private int rentalCost;
-    private String commentOfClient;
-    private OrderStatus orderStatus;
-    private PaymentStatus paymentStatus;
-    private PaymentMethod paymentMethod;
+    @Column(nullable = false)
+    private LocalDateTime startTime = LocalDateTime.now();
+    @Column(nullable = false)
+    private LocalDateTime endTime;
 
-    @Column(nullable = false)
-    private LocalDateTime timeOrderCreation = LocalDateTime.now();
-    @Column(nullable = false)
-    private LocalDateTime endDate;
+    private String startPoint;
+    private String endPoint;
+
+    private String numberOfPeople;
+    private String commentOfClient;
+    private int price;
+
+    @Enumerated(EnumType.STRING)
+    private OrderStatus orderStatus;
+
+    @Enumerated(EnumType.STRING)
+    private PaymentStatus paymentStatus;
+    @Enumerated(EnumType.STRING)
+    private PaymentMethod paymentMethod;
 
 }
