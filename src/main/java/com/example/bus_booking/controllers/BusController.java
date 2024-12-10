@@ -44,7 +44,7 @@ public class BusController {
 
     @GetMapping("/all")
     public List<Bus> getAllBuses() {
-        return busService.findAvailableBuses();
+        return busService.findAllBuses();
     }
 
     @GetMapping("/available")
