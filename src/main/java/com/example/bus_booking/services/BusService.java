@@ -62,6 +62,6 @@ public class BusService {
     }
 
     public double getAverageRatingByBusId(Long busId) {
-        return busRepository.findAvgRatingByBusId(busId);
+        return busRepository.findAvgRatingByBusId(busId) != null ? busRepository.findAvgRatingByBusId(busId) : 0.0;
     }
 }

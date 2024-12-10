@@ -28,9 +28,9 @@ public class ClientService {
                 .orElseThrow(() -> new NoSuchElementException("Клиент с email" + email + " не найден"));
     }
 
-    public Client getClientByPhoneNumber(String phoneNuber) {
-        return Optional.ofNullable(clientRepository.findByPhoneNumber(phoneNuber))
-                .orElseThrow(() -> new NoSuchElementException("Клиент с номером телефона " + phoneNuber + " не найден"));
+    public Client getClientByPhoneNumber(String phoneNumber) {
+        return Optional.ofNullable(clientRepository.findByPhoneNumber(phoneNumber))
+                .orElseThrow(() -> new NoSuchElementException("Клиент с номером телефона " + phoneNumber + " не найден"));
     }
 
     public Client updateClient(Long clientId, Client updatedClient) {
@@ -51,5 +51,10 @@ public class ClientService {
 
     public boolean isVerified(Long clientId) {
         return clientRepository.existsByIdAndIsVerifiedTrue(clientId);
+    }
+
+    public boolean isEmailVerified(Long clientID) {
+        Client client = getClientById(clientID);
+        return client.isVerifiedMail();
     }
 }

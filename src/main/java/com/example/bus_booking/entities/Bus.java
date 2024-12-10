@@ -3,6 +3,7 @@ package com.example.bus_booking.entities;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
+import jakarta.validation.constraints.PositiveOrZero;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -51,12 +52,15 @@ public class Bus {
     @Column(name = "avg_rating", columnDefinition = "NUMERIC(2, 1)")
     private Double avgRating;
 
-
+    @PositiveOrZero
     private int minRentHours;
+    @PositiveOrZero
     private int minCancelDay;
+    @Positive
     private int priceWeekends;
+    @Positive
     private int priceWeekdays;
-
+    @Column(unique = true)
     private String registrationNumber;
     private boolean isActive;
 

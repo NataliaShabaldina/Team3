@@ -15,4 +15,5 @@ public interface FavoriteRepository extends JpaRepository<Favorites, Long> {
     @Query("SELECT f.bus FROM Favorites f WHERE f.client.id = :clientId")
     List<Bus> findFavoriteBusesByClientId(@Param("clientId") Long clientId);
 
+    void deleteByClientIdAndBusId(Long clientId, Long busId);
 }
