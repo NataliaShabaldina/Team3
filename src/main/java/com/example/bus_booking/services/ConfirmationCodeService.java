@@ -4,7 +4,6 @@ import com.example.bus_booking.entities.Client;
 import com.example.bus_booking.entities.ConfirmationCode;
 import com.example.bus_booking.repositories.ConfirmationCodeRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.cglib.core.Local;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 

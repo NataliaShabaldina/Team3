@@ -8,10 +8,9 @@ import com.example.bus_booking.repositories.ClientRepository;
 import com.example.bus_booking.repositories.FavoriteRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -19,28 +18,47 @@ public class FavoriteService {
     private final FavoriteRepository favoriteRepository;
     private final ClientRepository clientRepository;
     private final BusRepository busRepository;
-
-    @Transactional
-    public Favorites addFavorite(Long clientId, Long busId) {
-        Optional<Client> client = clientRepository.findById(clientId);
-        Optional<Bus> bus = busRepository.findById(busId);
-
-        if (client.isPresent() && bus.isPresent()) {
-            Favorites favorite = new Favorites();
-            favorite.setClient(client.get());
-            favorite.setBus(bus.get());
-            return favoriteRepository.save(favorite);
-        } else {
-            throw new RuntimeException("Клиент или автобус не найдены");
-        }
-    }
-
-    @Transactional
-    public void removeFavorite(Long clientId, Long busId) {
-        favoriteRepository.deleteByClientIdAndBusId(clientId, busId);
-    }
+    private final ClientService clientService;
+    private final BusService busService;
 
     public List<Bus> getFavoriteBusesByClient(Long clientId) {
-        return favoriteRepository.findFavoriteBusesByClientId(clientId);
+        List<Favorites> favorites = favoriteRepository.findAllByClientId(clientId);
+        List<Bus> buses = new ArrayList<>();
+        for (Favorites favorite : favorites) {
+            buses.add(favorite.getBus());
+        }
+        return buses;
+    }
+
+    public void addToFavorites(String firstName,String lastName, Long busId) {
+        Client client = clientRepository.findByFirstNameAndLastName(firstName, lastName);
+        if (client == null) {
+            throw new IllegalStateException("Клиент не найден");
+        }
+
+        Favorites existingFavorite = favoriteRepository.findByClientIdAndBusId(client.getId(), busId);
+        if (existingFavorite != null) {
+            throw new IllegalStateException("Этот автобус уже в избранных");
+        }
+
+        Bus bus = busRepository.findById(busId).orElseThrow(() -> new IllegalStateException("Автобус не найден"));
+        Favorites favorite = new Favorites();
+        favorite.setClientId(client.getId());
+        favorite.setBus(bus);
+        favoriteRepository.save(favorite);
+    }
+
+    public void removeFavorite(String firstName, String lastName, Long busId) {
+        Client client = clientRepository.findByFirstNameAndLastName(firstName, lastName); // Пример
+        if (client == null) {
+            throw new IllegalStateException("Client not found");
+        }
+
+        Favorites existingFavorite = favoriteRepository.findByClientIdAndBusId(client.getId(), busId);
+        if (existingFavorite == null) {
+            throw new IllegalStateException("This bus is not in your favorites");
+        }
+
+        favoriteRepository.delete(existingFavorite);
     }
 }

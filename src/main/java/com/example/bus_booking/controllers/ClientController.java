@@ -2,9 +2,8 @@ package com.example.bus_booking.controllers;
 
 import com.example.bus_booking.entities.Client;
 import com.example.bus_booking.services.ClientService;
-import lombok.Getter;
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Controller;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -18,10 +17,13 @@ public class ClientController {
         return clientService.createClient(client);
     }
 
+
     @GetMapping("/{clientId}")
-    public Client getClientById(@PathVariable Long clientId) {
-        return clientService.getClientById(clientId);
+    public ResponseEntity<Client> getClientById(@PathVariable Long clientId) {
+        Client client = clientService.getClientById(clientId);
+        return ResponseEntity.ok(client);
     }
+
 
     @GetMapping("/email")
     public Client getClientByEmail(@RequestParam String email) {

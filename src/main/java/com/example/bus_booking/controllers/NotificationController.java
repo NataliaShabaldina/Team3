@@ -6,6 +6,7 @@ import com.example.bus_booking.enums.NotificationMethod;
 import com.example.bus_booking.enums.NotificationType;
 import com.example.bus_booking.services.NotificationService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 

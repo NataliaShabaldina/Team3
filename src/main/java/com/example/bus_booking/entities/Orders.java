@@ -4,6 +4,7 @@ import com.example.bus_booking.enums.OrderStatus;
 import com.example.bus_booking.enums.PaymentMethod;
 import com.example.bus_booking.enums.PaymentStatusEnum;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.AssertTrue;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -46,5 +47,19 @@ public class Orders {
 
     @Enumerated(EnumType.STRING)
     private PaymentMethod paymentMethod;
+
+    @AssertTrue(message = "Время окончания не может быть раньше времени начала")
+    public boolean isEndTimeValide() {
+        return endTime.isAfter(startTime);
+    }
+
+    public Orders(Client client, Bus bus, int seatCount) {
+        this.client = client;
+        this.bus = bus;
+        this.numberOfPeople = seatCount;
+        this.startTime = LocalDateTime.now();
+        this.orderStatus = OrderStatus.PENDING;
+        this.paymentStatus = PaymentStatusEnum.UNPAID;
+    }
 
 }

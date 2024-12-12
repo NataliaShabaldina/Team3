@@ -5,7 +5,6 @@ import com.example.bus_booking.repositories.BusRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
@@ -68,4 +67,13 @@ public class BusService {
     public List<Bus> findAllBuses() {
         return busRepository.findAll();
     }
+
+   public List<Bus> searchAvailableBuses(LocalDateTime start, LocalDateTime end, Boolean wifi, Boolean airConditioning, Integer minSeats) {
+        return busRepository.findAvailableBusesWithFilters(start, end, wifi, airConditioning, minSeats);
+   }
+
+    public Bus getBusDetails(Long busId) {
+        return busRepository.findById(busId).orElseThrow(() -> new RuntimeException("Bus not found"));
+    }
+
 }

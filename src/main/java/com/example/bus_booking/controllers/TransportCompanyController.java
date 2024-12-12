@@ -3,7 +3,6 @@ package com.example.bus_booking.controllers;
 
 import com.example.bus_booking.entities.TransportCompany;
 import com.example.bus_booking.services.TransportCompanyService;
-import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

@@ -42,6 +42,5 @@ public class Client {
     @Lob
     byte[] profilePhotos;
     private boolean isVerifiedMail = false;
-//    private boolean isVerifiedPhone = false;
-
+    private String password;
 }

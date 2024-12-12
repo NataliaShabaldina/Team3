@@ -16,10 +16,11 @@ public class Favorites {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
-    private Client client;
 
     @ManyToOne
     private Bus bus;
+
+    private Long clientId;
+    private Long busId;
 
 }

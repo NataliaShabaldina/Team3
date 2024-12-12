@@ -21,4 +21,7 @@ public class Payment {
 
     @Enumerated(EnumType.STRING)
     private PaymentStatusEnum paymentStatus;
+
+    private String paymentId;
+    private double amount;
 }

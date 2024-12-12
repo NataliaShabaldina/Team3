@@ -6,6 +6,7 @@ import lombok.Getter;
 public enum OrderStatus {
     CONFIRMED("Подтвержден"),
     COMPLETED("Завершен"),
+    PENDING("Ожидается"),
     CANCELLED("Отменен");
 
     private final String description;

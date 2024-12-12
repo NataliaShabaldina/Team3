@@ -4,7 +4,6 @@ package com.example.bus_booking.controllers;
 import com.example.bus_booking.entities.Review;
 import com.example.bus_booking.services.ReviewService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.web.ReactiveOffsetScrollPositionHandlerMethodArgumentResolver;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 

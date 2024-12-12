@@ -3,12 +3,11 @@ package com.example.bus_booking.controllers;
 import com.example.bus_booking.entities.Bus;
 import com.example.bus_booking.services.BusService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.NoSuchElementException;
 
 @RestController
 @RequestMapping("/buses")
@@ -30,6 +29,24 @@ public class BusController {
     public List<Bus> getBusesByModel(@RequestParam String model) {
         return busService.findBusesByModel(model);
     }
+
+    @GetMapping("/search")
+    public List<Bus> searchBuses(
+            @RequestParam String startDate,
+            @RequestParam String endDate,
+            @RequestParam(required = false) Boolean wifi,
+            @RequestParam(required = false) Boolean airConditioning,
+            @RequestParam(required = false) Integer minSeats) {
+        LocalDateTime start = LocalDateTime.from(LocalDate.parse(startDate));
+        LocalDateTime end = LocalDateTime.from(LocalDate.parse(endDate));
+        return busService.searchAvailableBuses(start, end, wifi, airConditioning, minSeats);
+    }
+
+    @GetMapping("/{busId}")
+    public Bus getBusDetails(@PathVariable Long busId) {
+        return busService.getBusDetails(busId);
+    }
+
 
     @PutMapping("/update/{busId}")
     public Bus updateBus(@PathVariable Long busId, @RequestBody Bus busDetails) {

@@ -30,6 +30,9 @@ public class Bus {
     @Length(max = 15)
     private String model;
 
+    @PositiveOrZero
+    private int availableSeats;
+
     private int yearOfManufacture;
 
     @NotNull
