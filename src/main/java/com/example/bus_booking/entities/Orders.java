@@ -1,7 +1,7 @@
 package com.example.bus_booking.entities;
 
 import com.example.bus_booking.enums.OrderStatus;
-import com.example.bus_booking.enums.PaymentMethod;
+
 import com.example.bus_booking.enums.PaymentStatusEnum;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.AssertTrue;
@@ -44,9 +44,6 @@ public class Orders {
 
     @Enumerated(EnumType.STRING)
     private PaymentStatusEnum paymentStatus;
-
-    @Enumerated(EnumType.STRING)
-    private PaymentMethod paymentMethod;
 
     @AssertTrue(message = "Время окончания не может быть раньше времени начала")
     public boolean isEndTimeValide() {

@@ -13,7 +13,7 @@ public interface ClientRepository extends JpaRepository<Client, Long> {
     Client findByPhoneNumber(String phoneNumber);
 
     //проверить, подтвержден ли клиент
-    boolean existsByIdAndIsVerifiedTrue(Long clientId);
+    boolean existsByIdAndIsVerifiedMailTrue(Long clientId);
 
     Client findByFirstNameAndLastName(String firstName, String lastName);
 

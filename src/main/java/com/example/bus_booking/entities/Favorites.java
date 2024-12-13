@@ -21,6 +21,6 @@ public class Favorites {
     private Bus bus;
 
     private Long clientId;
-    private Long busId;
+
 
 }

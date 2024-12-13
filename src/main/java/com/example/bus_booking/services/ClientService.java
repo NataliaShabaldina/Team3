@@ -71,7 +71,7 @@ public class ClientService {
 
 
     public boolean isVerified(Long clientId) {
-        return clientRepository.existsByIdAndIsVerifiedTrue(clientId);
+        return clientRepository.existsByIdAndIsVerifiedMailTrue(clientId);
     }
 
     public boolean isEmailVerified(Long clientId) {
