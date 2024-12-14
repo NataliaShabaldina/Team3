@@ -42,7 +42,7 @@ public class BusController {
         return busService.searchAvailableBuses(start, end, wifi, airConditioning, minSeats);
     }
 
-    @GetMapping("/{busId}")
+    @GetMapping("/{busDetailsId}")
     public Bus getBusDetails(@PathVariable Long busId) {
         return busService.getBusDetails(busId);
     }
