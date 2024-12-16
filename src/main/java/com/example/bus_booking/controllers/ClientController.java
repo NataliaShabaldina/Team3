@@ -24,6 +24,10 @@ public class ClientController {
         return ResponseEntity.ok(client);
     }
 
+    @GetMapping("/test")
+    public String test() {
+        return "test";
+    }
 
     @GetMapping("/email")
     public Client getClientByEmail(@RequestParam String email) {
