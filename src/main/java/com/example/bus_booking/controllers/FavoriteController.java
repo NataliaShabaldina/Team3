@@ -2,7 +2,6 @@ package com.example.bus_booking.controllers;
 
 
 import com.example.bus_booking.entities.Bus;
-import com.example.bus_booking.entities.FavoriteRequest;
 import com.example.bus_booking.services.FavoriteService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
