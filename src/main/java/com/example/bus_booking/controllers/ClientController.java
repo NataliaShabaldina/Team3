@@ -18,12 +18,16 @@ public class ClientController {
     }
 
 
-    @GetMapping("/{clientId}")
+        @GetMapping("/{clientId}")
     public ResponseEntity<Client> getClientById(@PathVariable Long clientId) {
         Client client = clientService.getClientById(clientId);
         return ResponseEntity.ok(client);
     }
 
+    @GetMapping("/test1")
+    public String test() {
+        return "test1";
+    }
 
     @GetMapping("/email")
     public Client getClientByEmail(@RequestParam String email) {

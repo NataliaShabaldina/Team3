@@ -12,6 +12,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/transport-companies")
 @RequiredArgsConstructor
+
 public class TransportCompanyController {
     private final TransportCompanyService transportCompanyService;
 
