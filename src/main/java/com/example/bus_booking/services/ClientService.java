@@ -3,7 +3,9 @@ package com.example.bus_booking.services;
 import com.example.bus_booking.entities.Client;
 import com.example.bus_booking.entities.RegisterRequest;
 import com.example.bus_booking.repositories.ClientRepository;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -16,11 +18,15 @@ import java.util.Optional;
 @Service
 @RequiredArgsConstructor
 public class ClientService {
+
+    @Autowired
     private final ClientRepository clientRepository;
     private final PasswordEncoder passwordEncoder;
 
+    @Transactional
     public Client createClient(Client client) {
-        return clientRepository.save(client);
+        client.setId(null);
+        return clientRepository.saveAndFlush(client);
     }
 
     public Client findByFirstNameAndLastName(String firstName, String lastName) {

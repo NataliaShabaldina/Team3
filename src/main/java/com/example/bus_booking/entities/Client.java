@@ -25,6 +25,9 @@ public class Client {
     private String middleName;
     private LocalDate birthDate;
 
+    @Version
+    private Long version;
+
     @Enumerated(EnumType.STRING)
     private Gender gender;
     @Column(unique = true, nullable = false)
