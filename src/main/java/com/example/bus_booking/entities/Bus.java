@@ -23,7 +23,6 @@ public class Bus {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @ManyToOne
-    @JoinColumn(name = "company_id", nullable = false)
     private TransportCompany transportCompany;
 
     @NotNull
@@ -35,7 +34,7 @@ public class Bus {
 
     private int yearOfManufacture;
 
-    @NotNull
+
     private LocalDateTime lastTODate;
 
     @Lob
