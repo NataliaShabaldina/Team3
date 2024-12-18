@@ -16,7 +16,7 @@ import java.util.List;
 public class TransportCompanyController {
     private final TransportCompanyService transportCompanyService;
 
-    @PostMapping
+    @PostMapping("/create")
     public ResponseEntity<TransportCompany> createTransportCompany(@RequestBody TransportCompany transportCompany) {
         return ResponseEntity.ok(transportCompanyService.createTransportCompany(transportCompany));
     }
